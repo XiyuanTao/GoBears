@@ -14,6 +14,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
+
+
+
+
 def change_address(postal):
     while True:
         try:
@@ -59,7 +63,6 @@ def parse_list(page_source, current_url):
         url = url_front + s.attr("href")
         yield url
 
-
 def parse_detail(page_source):
     html = pq(page_source)
     attr_list = []
@@ -74,9 +77,9 @@ def parse_detail(page_source):
         li_text_list.append(li.text().strip())
 
     # 主图
-    z_img = html("img#landingImage").attr("data-old-hires")
-    if z_img == "":
-        z_img = html("img#landingImage").attr("src")
+    # z_img = html("img#landingImage").attr("data-old-hires")
+    # if z_img == "":
+    #     z_img = html("img#landingImage").attr("src")
 
     # 价格
     price = html('span[id*="priceblock"]').text().replace('\xa0', '')
@@ -90,47 +93,7 @@ def parse_detail(page_source):
     if review_num != "":
         review_num = review_num.split(" ")[0]
 
-    # 排名
-    rank1 = ""
-    rank2 = ""
-    tr_list = html("#productDetails_detailBullets_sections1 tr").items()
-    for tr in tr_list:
-        if "Rank" in tr("th").text():
-            rank1 = tr("td > span > span:nth-child(1)").text().strip()
-            rank2 = tr("td > span > span:nth-child(3)").text().strip()
-            break
-    if rank1 == "":
-        first_rank = html("#SalesRank")
-        if first_rank("b"):
-            rank2 = html("#SalesRank > ul").text().replace("\xa0", "")
-            first_rank.remove("b")
-            first_rank.remove("ul.zg_hrsr")
-            first_rank.remove("style")
-            rank1 = first_rank.text()
-        else:
-            first_rank = html("div.attrG tr#SalesRank > td.value")
-            rank2 = html("div.attrG tr#SalesRank > td.value ul.zg_hrsr").text().replace("\xa0", "")
-            first_rank.remove("ul.zg_hrsr")
-            first_rank.remove("style")
-            rank1 = first_rank.text()
-    if rank1 == "":
-        b_html = BeautifulSoup(page_source, 'lxml')
-        tr_list = b_html.select("#productDetails_detailBullets_sections1 tr")
-        for tr in tr_list:
-            if 'Rank' in tr.th.text:
-                rank1_list = tr.select("td > span > span:nth-child(1)")
-                if rank1_list:
-                    rank1 = rank1_list[0].text.strip()
-                rank2_list = tr.select("td > span > span:nth-child(3)")
-                if rank2_list:
-                    rank2 = rank2_list[0].text.strip()
-
-    rank_regex = re.compile("\d(.*?)\s")
-    if rank1 != "":
-        rank1 = rank_regex.search(rank1).group()
-    if rank2 != "":
-        rank2 = rank_regex.search(rank2).group()
-
+    # 得分
     score = html("span[data-hook=rating-out-of-text]").text()
     if score == "":
         try:
@@ -142,62 +105,89 @@ def parse_detail(page_source):
 
     asin = ''
     attr_list.append(asin)
-    attr_list.append(z_img)
+    #attr_list.append(z_img)
     attr_list.append(title)
     attr_list.append(price)
     attr_list.append(score)
     attr_list.append(int(review_num.strip().replace(',', '')) if review_num else 0)
-    attr_list.append(int(rank1.strip().replace(',', '')) if rank1 else 0)
-    attr_list.append(rank2)
 
     return attr_list
 
+# def list_scraping(search_page_urls,use_postal,postal,num_pages):
+#     for search_page_url in search_page_urls:
+
+
+def datail_scraping(search_page_urls,use_postal,postal,num_pages):
+    detail = []
+    for search_page_url in search_page_urls:
+        for i in range(1, num_pages):
+            print("正在爬取", search_page_url.format(i))
+            driver.get(search_page_url.format(i))
+            time.sleep(2)
+
+            if i == 1 and bool(use_postal):
+                change_address(postal)
+
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.s-result-list")))
+
+            for url in parse_list(driver.page_source, search_page_url.format(i)):
+                js = 'window.open("' + url + '&language=en_US");'
+                driver.execute_script(js)
+
+                # 网页窗口句柄集
+                handles = driver.window_handles
+                # 进行网页窗口切换
+                driver.switch_to.window(handles[-1])
+
+                page_source = driver.page_source
+                info_list = parse_detail(driver.page_source)
+                info_list.append(driver.current_url)
+
+                time.sleep(2)
+
+                asin_regex = re.compile('/dp/(.*?)/')
+                asin = asin_regex.findall(driver.current_url)[0]
+                info_list[0] = asin
+
+                print(info_list)
+                detail.append(info_list)
+
+                driver.close()
+                driver.switch_to.window(handles[0])
+    return detail
+
 if __name__ == '__main__':
+    #是否使用固定邮编
+    use_postal = 0
+    postal = "94704"
+    #爬取每一品类商品列表的页面数
+    num_pages = 5
+    #需要爬取的搜索页面链接：
+    # search_page_urls =['https://www.amazon.com/b?node=11057651&page={}',
+    #                    'https://www.amazon.com/b?node=11056281&page={}',
+    #                    'https://www.amazon.com/b?node=11059111&page={}',
+    #                    'https://www.amazon.com/b?node=10980521&page={}',
+    #                    'https://www.amazon.com/b?node=898400&page={}']
+
+    search_page_urls = ['https://www.amazon.com/s?k=shampoo&crid=3HRLZHDGH8FVG&sprefix=shampo%2Caps%2C669&ref=nb_sb_noss_2&page={}',
+                        'https://www.amazon.com/s?k=Body+wash&crid=A4U5UM80BRMO&sprefix=body+wash%2Caps%2C396&ref=nb_sb_noss&page={}',
+                        'https://www.amazon.com/s?k=Lipsticks&crid=156DT8FY808PV&sprefix=lipsticks%2Caps%2C400&ref=nb_sb_noss&page={}',
+                        'https://www.amazon.com/s?k=Car+camera&crid=1M80O16SRJBK0&sprefix=lipsticks%2Caps%2C363&ref=nb_sb_noss&page={}',
+                        'https://www.amazon.com/s?k=Security+camera&crid=22KBIIU7EP084&sprefix=car+camera%2Caps%2C401&ref=nb_sb_noss&page={}']
+
     options = webdriver.ChromeOptions()
     options.add_argument('--disable-gpu')
     options.add_argument("disable-web-security")
     options.add_argument('disable-infobars')
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
-    driver = webdriver.Chrome('./chromedriver')
+    driver = webdriver.Chrome('./chromedriver', chrome_options=options)
     wait = WebDriverWait(driver, 20)
 
     driver.maximize_window()
     row = 2
 
-    search_page_url = 'https://www.amazon.com/s?k=basketball+hoop&crid=1FVAKJZW1GRRW&sprefix=bas%2Caps%2C405&ref=nb_sb_ss_i_1_3&page={}'
-    postal = "20237"
-    for i in range(1, 2):
-        print("正在爬取", search_page_url.format(i))
-        driver.get(search_page_url.format(i))
-        time.sleep(2)
-
-        if i == 1:
-            change_address(postal)
-
-        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.s-result-list")))
-
-        for url in parse_list(driver.page_source, search_page_url.format(i)):
-            js = 'window.open("' + url + '&language=en_US");'
-            driver.execute_script(js)
-
-            # 网页窗口句柄集
-            handles = driver.window_handles
-            # 进行网页窗口切换
-            driver.switch_to.window(handles[-1])
-
-            page_source = driver.page_source
-            info_list = parse_detail(driver.page_source)
-            info_list.append(driver.current_url)
-
-            time.sleep(2)
-
-            asin_regex = re.compile('/dp/(.*?)/')
-            asin = asin_regex.findall(driver.current_url)[0]
-            info_list[0] = asin
-
-            print(info_list)
-
-            driver.close()
-            driver.switch_to.window(handles[0])
+    #list_scraping(search_page_urls,use_postal,postal,num_pages)
+    detail = datail_scraping(search_page_urls,use_postal,postal,num_pages)
+    print('this is detail')
     print("爬取结束")
 
