@@ -158,7 +158,7 @@ if __name__ == '__main__':
     options.add_argument("disable-web-security")
     options.add_argument('disable-infobars')
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
-    driver = webdriver.Chrome(chrome_options=options)
+    driver = webdriver.Chrome('./chromedriver')
     wait = WebDriverWait(driver, 20)
 
     driver.maximize_window()
