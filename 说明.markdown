@@ -39,7 +39,13 @@ To do：
 - https://www.amazon.com/b?node=11059111
 - https://www.amazon.com/b?node=10980521
 - https://www.amazon.com/b?node=898400
+  
 
+- https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&_encoding=UTF8&c=ts&qid=1642254517&ts_id=11057651&ref=sr_pg_1
+- (https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&_encoding=UTF8&c=ts&qid=1642254548&ts_id=11056281&ref=sr_pg_1
+- https://www.amazon.com/s?k=Lipstick&i=beauty&rh=n%3A11059111&_encoding=UTF8&c=ts&qid=1642254571&ts_id=11059111&ref=sr_pg_1
+- https://www.amazon.com/s?k=Car+Video&i=car-electronics&rh=n%3A10980521&_encoding=UTF8&c=ts&qid=1642254612&ts_id=10980521&ref=sr_pg_1
+- https://www.amazon.com/s?k=Surveillance+%26+Security+Cameras&i=photo&rh=n%3A898400&_encoding=UTF8&c=ts&qid=1642254637&ts_id=898400&ref=sr_pg_1
 to see the details, go [https://docs.google.com/spreadsheets/d/1aoSy4_zLt8Vc3TR0U84W-je9JJqLyFtfu62cKf9Svp8/edit?usp=sharing](url)
 
 

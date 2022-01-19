@@ -22,6 +22,7 @@ def change_address(postal):
     while True:
         try:
             driver.find_element_by_id('glow-ingress-line1').click()
+            # driver.find_element_by_id('nav-global-location-slot').click()
             time.sleep(2)
         except Exception as e:
             driver.refresh()
@@ -54,6 +55,13 @@ def change_address(postal):
     time.sleep(3)
 
 def parse_list(page_source, current_url,num_pages,category):
+    # html = pq(page_source)
+    # url_front = current_url.split("/s")[0]
+    # item_urls = html("h2 > a.a-link-normal.a-text-normal").items()
+    #
+    # for s in item_urls:
+    #     url = url_front + s.attr("href")
+    #     yield url
     order_in_page = 1
     search_result = []
 
@@ -130,6 +138,10 @@ def parse_list(page_source, current_url,num_pages,category):
         coupon = tr.xpath('.//SPAN[@class="s-coupon-clipped aok-hidden"]/text()')[0] if tr.xpath(
             './/SPAN[@class="s-coupon-clipped aok-hidden"]/text()') else 0
 
+        # PAGE
+        # now_page = page
+        # page+=1
+
         # ORDER_IN_PAGE
         now_order = order_in_page
         order_in_page += 1
@@ -138,6 +150,7 @@ def parse_list(page_source, current_url,num_pages,category):
         time_year = datetime.today().year
         time_month = datetime.today().month
         time_day = datetime.today().day
+        # time_isoweekday = datetime.isoweekday()
 
         good_info.append(asin)
         good_info.append(category)
@@ -170,6 +183,7 @@ def parse_list(page_source, current_url,num_pages,category):
         yield fullurl
 
 def parse_detail(page_source):
+    #html = pq(page_source)
     html = etree.HTML(page_source)
     attr_list = []
     fullurl = driver.current_url
@@ -201,17 +215,15 @@ def parse_detail(page_source):
     star_2 = re.sub(u"([^\u0030-\u0039])", "", star_2)
     star_1 = re.sub(u"([^\u0030-\u0039])", "", star_1)
     star_avg = star_avg.replace(",", "")
-
-    rating_dist.append(time_year)
-    rating_dist.append(time_month)
-    rating_dist.append(time_day)
     rating_dist.append(star_5)
     rating_dist.append(star_4)
     rating_dist.append(star_3)
     rating_dist.append(star_2)
     rating_dist.append(star_1)
     rating_dist.append(star_avg)
-
+    rating_dist.append(time_year)
+    rating_dist.append(time_month)
+    rating_dist.append(time_day)
     with open('rating_distribution.csv', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(rating_dist)
@@ -225,14 +237,13 @@ def parse_detail(page_source):
         by_feature.append(asin)
         by_feature.append(i)
         i += 1
-        by_feature.append(time_year)
-        by_feature.append(time_month)
-        by_feature.append(time_day)
         feature = tr.xpath('.//span[@class="a-size-base a-color-base"]/text()')[0]
         star = tr.xpath('.//span[@class="a-size-base a-color-tertiary"]/text()')[0]
         by_feature.append(feature)
         by_feature.append(star)
-
+        by_feature.append(time_year)
+        by_feature.append(time_month)
+        by_feature.append(time_day)
         with open('by_feature.csv', 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(by_feature)
@@ -298,7 +309,20 @@ def parse_detail(page_source):
             writer.writerow(review)
         review = []
 
+
+
+
+    # attr_list.append(asin)
+    # #attr_list.append(z_img)
+    # attr_list.append(title)
+    # attr_list.append(price)
+    # attr_list.append(score)
+    # attr_list.append(int(review_num.strip().replace(',', '')) if review_num else 0)
+
     return attr_list
+
+# def list_scraping(search_page_urls,use_postal,postal,num_pages):
+#     for search_page_url in search_page_urls:
 
 
 def datail_scraping(search_page_urls,use_postal,postal,num_pages):
@@ -369,6 +393,12 @@ if __name__ == '__main__':
     postal_nyc = '10027'
     #爬取每一品类商品列表的页面数
     num_pages = 5
+    #需要爬取的搜索页面链接：
+    # search_page_urls =['https://www.amazon.com/b?node=11057651&page={}',
+    #                    'https://www.amazon.com/b?node=11056281&page={}',
+    #                    'https://www.amazon.com/b?node=11059111&page={}',
+    #                    'https://www.amazon.com/b?node=10980521&page={}',
+    #                    'https://www.amazon.com/b?node=898400&page={}']
 
     search_page_urls = ['https://www.amazon.com/s?k=shampoo&crid=3HRLZHDGH8FVG&sprefix=shampo%2Caps%2C669&ref=nb_sb_noss_2&page={}',
                         'https://www.amazon.com/s?k=Body+wash&crid=A4U5UM80BRMO&sprefix=body+wash%2Caps%2C396&ref=nb_sb_noss&page={}',
@@ -389,6 +419,7 @@ if __name__ == '__main__':
     driver.maximize_window()
     row = 2
 
+    #list_scraping(search_page_urls,use_postal,postal,num_pages)
     detail = datail_scraping(search_page_urls,use_postal,postal_berkeley,num_pages)
     print('this is detail')
     print("爬取结束")
