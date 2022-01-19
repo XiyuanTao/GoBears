@@ -300,11 +300,19 @@ def parse_detail(page_source):
 
     return attr_list
 
-
 def datail_scraping(search_page_urls,use_postal,postal,num_pages):
     detail = []
     cate = 0
     for search_page_url in search_page_urls:
+        if cate == 0:
+            category = 'shampoo'
+        elif cate == 1:
+            category = 'body wash'
+        elif cate == 2:
+            category = 'lipstick'
+        elif cate == 3:
+            category = 'car camera'
+
         for i in range(1, num_pages):
             print("正在爬取", search_page_url.format(i))
             driver.get(search_page_url.format(i))
@@ -314,10 +322,6 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
                 change_address(postal)
 
             wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.s-result-list")))
-            if cate == 0:category ='shampoo'
-            elif cate == 1:category ='body wash'
-            elif cate == 2:category ='lipstick'
-            elif cate == 3:category ='car camera'
             for url in parse_list(driver.page_source, search_page_url.format(i),i,category):
                 js = 'window.open("' + url + '&language=en_US");'
                 driver.execute_script(js)
@@ -327,24 +331,15 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
                 # 进行网页窗口切换
                 driver.switch_to.window(handles[-1])
 
-                #翻页
+                #下划
                 time.sleep(2)
-                # page_source = driver.page_source
-                # js = "var q=document.documentElement.scrollTop=4000"
-                # driver.execute_script(js)
-                # js = "var q=document.documentElement.scrollTop=1700"
-                # driver.execute_script(js)
-                # driver.execute_script(js)
                 js = "return action=document.body.scrollHeight"
                 new_height = driver.execute_script(js)
                 for i in range(0, new_height, 150):
                     driver.execute_script('window.scrollTo(0, %s)' % (i))
-                #driver.find_elements_by_xpath('//span[@class = "a-expander-prompt" and text()=See more]').click()
-
-                # ele = driver.find_elements_by_xpath('.//div[@id=cr-dp-lighthut]')[0]
-                # driver.execute_script("arguments[0].scrollIntoView();", ele)
                 time.sleep(1)
 
+                # 翻页
                 info_list = parse_detail(driver.page_source)
                 info_list.append(driver.current_url)
 
@@ -359,7 +354,7 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
 
                 driver.close()
                 driver.switch_to.window(handles[0])
-            cate+=1
+        cate+=1
     return detail
 
 if __name__ == '__main__':
