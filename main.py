@@ -331,13 +331,17 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
                 # 进行网页窗口切换
                 driver.switch_to.window(handles[-1])
 
-                #下划
+                # 下划
                 time.sleep(2)
                 js = "return action=document.body.scrollHeight"
                 new_height = driver.execute_script(js)
                 for i in range(0, new_height, 150):
                     driver.execute_script('window.scrollTo(0, %s)' % (i))
                 time.sleep(1)
+
+                # 加载更多by_feature
+                if driver.fid_element_by_xpath('.//span[@class="a-expander-prompt"  and  text() = "See more"]'):
+                    driver.fid_element_by_xpath('.//span[@class="a-expander-prompt"  and  text() = "See more"]').click()
 
                 # 翻页
                 info_list = parse_detail(driver.page_source)
