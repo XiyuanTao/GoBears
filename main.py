@@ -140,6 +140,9 @@ def parse_list(page_source, current_url,num_pages,category):
         time_day = datetime.today().day
 
         good_info.append(asin)
+        good_info.append(time_year)
+        good_info.append(time_month)
+        good_info.append(time_day)
         good_info.append(category)
         good_info.append(num_pages)
         good_info.append(now_order)
@@ -158,9 +161,7 @@ def parse_list(page_source, current_url,num_pages,category):
         good_info.append(free_shipping)
         good_info.append(coupon)
         #good_info.append(page_num)
-        good_info.append(time_year)
-        good_info.append(time_month)
-        good_info.append(time_day)
+
 
         search_result.append(good_info)
         with open('search_result.csv', 'a', newline='') as csvfile:
@@ -223,11 +224,11 @@ def parse_detail(page_source):
     i=1
     for tr in trs:
         by_feature.append(asin)
-        by_feature.append(i)
-        i += 1
         by_feature.append(time_year)
         by_feature.append(time_month)
         by_feature.append(time_day)
+        by_feature.append(i)
+        i += 1
         feature = tr.xpath('.//span[@class="a-size-base a-color-base"]/text()')[0]
         star = tr.xpath('.//span[@class="a-size-base a-color-tertiary"]/text()')[0]
         by_feature.append(feature)
@@ -279,11 +280,11 @@ def parse_detail(page_source):
         component = tr.xpath('.//span[@class="a-size-base review-text"]/div/div/span/text()')[0] if tr.xpath(
             './/span[@class="a-size-base review-text"]/div/div/span/text()') else ''
         review.append(asin)
-        review.append(i)
-        i+=1
         review.append(time_year)
         review.append(time_month)
         review.append(time_day)
+        review.append(i)
+        i += 1
         review.append(title)
         review.append(star)
         review.append(helpful)
@@ -340,8 +341,9 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
                 time.sleep(1)
 
                 # 加载更多by_feature
-                if driver.fid_element_by_xpath('.//span[@class="a-expander-prompt"  and  text() = "See more"]'):
-                    driver.fid_element_by_xpath('.//span[@class="a-expander-prompt"  and  text() = "See more"]').click()
+                html = etree.HTML(driver.page_source)
+                if html.xpath('.//span[@class="a-expander-prompt"  and  text() = "See more"]'):
+                    driver.find_element_by_xpath('.//span[@class="a-expander-prompt"  and  text() = "See more"]').click()
 
                 # 翻页
                 info_list = parse_detail(driver.page_source)
