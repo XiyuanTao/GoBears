@@ -130,6 +130,18 @@ def parse_list(page_source, current_url,num_pages,category):
         coupon = tr.xpath('.//SPAN[@class="s-coupon-clipped aok-hidden"]/text()')[0] if tr.xpath(
             './/SPAN[@class="s-coupon-clipped aok-hidden"]/text()') else 0
 
+        # JUST_SAVE
+        just_save_in_red = tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Save")]/text()')[0].split(" ")[1] if tr.xpath('.////span[@class="a-badge-text" and contains(text(),"Save")]/text()')[0] else 0
+
+        # BEST_SELLER
+        best_sell = 1 if tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Best")]') else 0
+
+        # AMAZON'S CHOICE
+        amazon_choice = 1 if tr.xpath('.//span[contains(@id,"amazons-choice")]') else 0
+
+        # Limited time deal
+        limited_time_deal = 1 if tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Limited")]') else 0
+
         # ORDER_IN_PAGE
         now_order = order_in_page
         order_in_page += 1
@@ -147,7 +159,6 @@ def parse_list(page_source, current_url,num_pages,category):
         good_info.append(num_pages)
         good_info.append(now_order)
         good_info.append(title)
-        good_info.append(fullurl)
         good_info.append(price)
         good_info.append(original_price)
         good_info.append(specification)
@@ -160,6 +171,11 @@ def parse_list(page_source, current_url,num_pages,category):
         good_info.append(delivery_time)
         good_info.append(free_shipping)
         good_info.append(coupon)
+        good_info.append(just_save_in_red)
+        good_info.append(best_sell)
+        good_info.append(amazon_choice)
+        good_info.append(limited_time_deal)
+        good_info.append(fullurl)
         #good_info.append(page_num)
 
 
@@ -341,9 +357,9 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
                 time.sleep(1)
 
                 # 加载更多by_feature
-                html = etree.HTML(driver.page_source)
-                if html.xpath('.//span[@class="a-expander-prompt"  and  text() = "See more"]'):
-                    driver.find_element_by_xpath('.//span[@class="a-expander-prompt"  and  text() = "See more"]').click()
+                # html = etree.HTML(driver.page_source)
+                # if html.xpath('.//span[@class="a-expander-prompt"  and  text() = "See more"]'):
+                #     driver.find_element_by_xpath('.//span[@class="a-expander-prompt"  and  text() = "See more"]').click()
 
                 # 翻页
                 info_list = parse_detail(driver.page_source)
