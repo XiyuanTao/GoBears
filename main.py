@@ -131,7 +131,7 @@ def parse_list(page_source, current_url,num_pages,category):
             './/SPAN[@class="s-coupon-clipped aok-hidden"]/text()') else 0
 
         # JUST_SAVE
-        just_save_in_red = tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Save")]/text()')[0].split(" ")[1] if tr.xpath('.////span[@class="a-badge-text" and contains(text(),"Save")]/text()')[0] else 0
+        just_save_in_red = tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Save")]/text()')[0].split(" ")[1] if tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Save")]/text()') else 0
 
         # BEST_SELLER
         best_sell = 1 if tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Best")]') else 0
@@ -176,7 +176,6 @@ def parse_list(page_source, current_url,num_pages,category):
         good_info.append(amazon_choice)
         good_info.append(limited_time_deal)
         good_info.append(fullurl)
-        #good_info.append(page_num)
 
 
         search_result.append(good_info)
@@ -293,7 +292,7 @@ def parse_detail(page_source):
             './/span[@data-hook="avp-badge-linkless"]/text()') else ''
         vine = tr.xpath('.//span[@data-hook="linkless-vine-review-badge"]/text()')[0] if tr.xpath(
             './/span[@data-hook="linkless-vine-review-badge"]/text()') else ''
-        component = tr.xpath('.//span[@class="a-size-base review-text"]/div/div/span/text()')[0] if tr.xpath(
+        component = tr.xpath('.//span[@class="a-size-base review-text"]/div/div/span/text()')[0].replace('\r','').strip() if tr.xpath(
             './/span[@class="a-size-base review-text"]/div/div/span/text()') else ''
         review.append(asin)
         review.append(time_year)
