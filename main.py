@@ -142,6 +142,10 @@ def parse_list(page_source, current_url,num_pages,category):
         # Limited time deal
         limited_time_deal = 1 if tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Limited")]') else 0
 
+        # amazon brand
+        amazon_brand = 1 if tr.xpath(
+            './/span[@class="a-size-micro a-color-secondary" and contains(text(),"Featured from our brands")]') else 0
+
         # ORDER_IN_PAGE
         now_order = order_in_page
         order_in_page += 1
@@ -172,6 +176,7 @@ def parse_list(page_source, current_url,num_pages,category):
         good_info.append(free_shipping)
         good_info.append(coupon)
         good_info.append(just_save_in_red)
+        good_info.append(amazon_brand)
         good_info.append(best_sell)
         good_info.append(amazon_choice)
         good_info.append(limited_time_deal)
@@ -292,7 +297,7 @@ def parse_detail(page_source):
             './/span[@data-hook="avp-badge-linkless"]/text()') else ''
         vine = tr.xpath('.//span[@data-hook="linkless-vine-review-badge"]/text()')[0] if tr.xpath(
             './/span[@data-hook="linkless-vine-review-badge"]/text()') else ''
-        component = tr.xpath('.//span[@class="a-size-base review-text"]/div/div/span/text()')[0].replace('\r','').strip() if tr.xpath(
+        component = tr.xpath('.//span[@class="a-size-base review-text"]/div/div/span/text()')[0].replace('\n','').replace('\r','').strip() if tr.xpath(
             './/span[@class="a-size-base review-text"]/div/div/span/text()') else ''
         review.append(asin)
         review.append(time_year)

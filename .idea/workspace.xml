@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c26409f8-927b-4032-93f4-4d8f87348697" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/by_feature.csv" beforeDir="false" afterPath="$PROJECT_DIR$/by_feature.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/key_words.csv" beforeDir="false" afterPath="$PROJECT_DIR$/key_words.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rating_distribution.csv" beforeDir="false" afterPath="$PROJECT_DIR$/rating_distribution.csv" afterDir="false" />
@@ -143,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642617912225</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序&#10;增加just-save\best-seller\amazon-choice\limited-time-deal to search_result&#10;将url置于search_result最后">
+      <created>1642618179252</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1642618179252</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
