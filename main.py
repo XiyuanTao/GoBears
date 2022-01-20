@@ -101,9 +101,8 @@ def parse_list(page_source, current_url,num_pages,category):
             './/span[contains(@class,"a-icon-alt")]/text()') else 0
 
         # RATINGS_NUM
-        ratings_num = tr.xpath('.//a[@class="a-link-normal s-link-style"]//span[@class="a-size-base"]/text()')[
-            0].replace(",", "") if tr.xpath(
-            './/a[@class="a-link-normal s-link-style"]//span[@class="a-size-base"]/text()') else 0
+        ratings_num = tr.xpath('.//span[@class="a-size-base a-color-base s-underline-text"]/text()')[
+            0].replace(",", "") if tr.xpath('.//span[@class="a-size-base a-color-base s-underline-text"]/text()') else 0
 
         # SPONSORED
         sponsored = 1 if tr.xpath(
@@ -162,24 +161,24 @@ def parse_list(page_source, current_url,num_pages,category):
         good_info.append(category)
         good_info.append(num_pages)
         good_info.append(now_order)
-        good_info.append(title)
+        good_info.append(ratings_num)
+        good_info.append(rating_5)
         good_info.append(price)
         good_info.append(original_price)
-        good_info.append(specification)
-        good_info.append(price_of_sepcification)
-        good_info.append(rating_5)
-        good_info.append(ratings_num)
         good_info.append(sponsored)
-        good_info.append(subscribe)
         good_info.append(prime)
-        good_info.append(delivery_time)
         good_info.append(free_shipping)
-        good_info.append(coupon)
         good_info.append(just_save_in_red)
         good_info.append(amazon_brand)
         good_info.append(best_sell)
         good_info.append(amazon_choice)
         good_info.append(limited_time_deal)
+        good_info.append(subscribe)
+        good_info.append(coupon)
+        good_info.append(specification)
+        good_info.append(delivery_time)
+        good_info.append(price_of_sepcification)
+        good_info.append(title)
         good_info.append(fullurl)
 
 
@@ -214,7 +213,7 @@ def parse_detail(page_source):
     html.xpath('//table[@class="a-normal a-align-center a-spacing-base"]/tbody[1]/tr[4]/td[3]/span[2]/a[1]/text()')[0] if html.xpath('//table[@class="a-normal a-align-center a-spacing-base"]/tbody[1]/tr[4]/td[3]/span[2]/a[1]/text()') else '0'
     star_1 = \
     html.xpath('//table[@class="a-normal a-align-center a-spacing-base"]/tbody[1]/tr[5]/td[3]/span[2]/a[1]/text()')[0] if html.xpath('//table[@class="a-normal a-align-center a-spacing-base"]/tbody[1]/tr[5]/td[3]/span[2]/a[1]/text()') else '0'
-    star_avg = html.xpath('//span[@class="a-size-medium a-color-base"]/text()')[0].split(" ")[0]
+    star_avg = html.xpath('//span[@class="a-size-medium a-color-base"]/text()')[0].split(" ")[0] if html.xpath('//span[@class="a-size-medium a-color-base"]/text()') else 0
     rating_dist.append(asin)
     star_5 = re.sub(u"([^\u0030-\u0039])", "", star_5)
     star_4 = re.sub(u"([^\u0030-\u0039])", "", star_4)
@@ -389,7 +388,7 @@ if __name__ == '__main__':
     postal_berkeley = "94704"
     postal_nyc = '10027'
     #爬取每一品类商品列表的页面数
-    num_pages = 5
+    num_pages = 6
 
     search_page_urls = ['https://www.amazon.com/s?k=shampoo&crid=3HRLZHDGH8FVG&sprefix=shampo%2Caps%2C669&ref=nb_sb_noss_2&page={}',
                         'https://www.amazon.com/s?k=Body+wash&crid=A4U5UM80BRMO&sprefix=body+wash%2Caps%2C396&ref=nb_sb_noss&page={}',
