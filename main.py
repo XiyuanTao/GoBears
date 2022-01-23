@@ -71,9 +71,6 @@ def parse_list(page_source, current_url,num_pages,category):
         asin = re.search('(?<=(dp/))(.+?){10}', fullurl)[0] if re.search('(?<=(dp/))(.+?){10}', fullurl) else \
         re.search('(?<=(dp%2F))(.+?){10}', fullurl)[0]
 
-
-
-
         # TITLE
         title = tr.xpath('.//span[contains(@class,"a-size-base-plus a-color-base a-text-normal")]/text()')[0]
 
@@ -101,8 +98,11 @@ def parse_list(page_source, current_url,num_pages,category):
             './/span[contains(@class,"a-icon-alt")]/text()') else 0
 
         # RATINGS_NUM
-        ratings_num = tr.xpath('.//span[@class="a-size-base a-color-base s-underline-text"]/text()')[
-            0].replace(",", "") if tr.xpath('.//span[@class="a-size-base a-color-base s-underline-text"]/text()') else 0
+        ratings_num = tr.xpath('.//div[@class="a-row a-size-small"]/span[2]/@aria-label')[
+            0].replace(",", "") if tr.xpath('.//div[@class="a-row a-size-small"]/span[2]/@aria-label')  else 0
+
+        # ratings_num = tr.xpath('.//span[@class="a-size-base a-color-base s-underline-text"]/text()')[
+        #     0].replace(",", "") if tr.xpath('.//span[@class="a-size-base a-color-base s-underline-text"]/text()') else 0
 
         # SPONSORED
         sponsored = 1 if tr.xpath(
@@ -213,7 +213,7 @@ def parse_detail(page_source):
     html.xpath('//table[@class="a-normal a-align-center a-spacing-base"]/tbody[1]/tr[4]/td[3]/span[2]/a[1]/text()')[0] if html.xpath('//table[@class="a-normal a-align-center a-spacing-base"]/tbody[1]/tr[4]/td[3]/span[2]/a[1]/text()') else '0'
     star_1 = \
     html.xpath('//table[@class="a-normal a-align-center a-spacing-base"]/tbody[1]/tr[5]/td[3]/span[2]/a[1]/text()')[0] if html.xpath('//table[@class="a-normal a-align-center a-spacing-base"]/tbody[1]/tr[5]/td[3]/span[2]/a[1]/text()') else '0'
-    star_avg = html.xpath('//span[@class="a-size-medium a-color-base"]/text()')[0].split(" ")[0] if html.xpath('//span[@class="a-size-medium a-color-base"]/text()') else 0
+    star_avg = html.xpath('//span[@class="a-size-medium a-color-base"]/text()')[0].split(" ")[0] if html.xpath('//span[@class="a-size-medium a-color-base"]/text()') else '0'
     rating_dist.append(asin)
     star_5 = re.sub(u"([^\u0030-\u0039])", "", star_5)
     star_4 = re.sub(u"([^\u0030-\u0039])", "", star_4)
@@ -277,7 +277,7 @@ def parse_detail(page_source):
 
     # REVIEW
     review = []
-    trs = html.xpath('//div[@class="a-section review aok-relative"]')
+    trs = html.xpath('//div[@class="a-section review aok-relative"]') if html.xpath('//div[@class="a-section review aok-relative"]') else []
     i=1
     for tr in trs:
         title = tr.xpath('.//a[@data-hook="review-title"]/span/text()')[0] if tr.xpath(
@@ -412,4 +412,3 @@ if __name__ == '__main__':
     detail = datail_scraping(search_page_urls,use_postal,postal_berkeley,num_pages)
     print('this is detail')
     print("爬取结束")
-

@@ -29,6 +29,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="23jl5neHbE5eeCP3N34FJdAW7Dx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -71,7 +74,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -90,6 +93,81 @@
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="GoBears" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Docutils task">
+      <module name="GoBears" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Sphinx task">
+      <module name="GoBears" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="GoBears" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="GoBears" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
   </component>
@@ -158,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642656070901</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序&#10;增加just-save\best-seller\amazon-choice\limited-time-deal to search_result&#10;将url置于search_result最后&#10;增加amazon-brand&#10;增加samples">
+      <created>1642669009435</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1642669009435</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -171,7 +256,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="可运行版本-源码" />
@@ -180,6 +264,7 @@
     <MESSAGE value="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序" />
     <MESSAGE value="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序&#10;增加just-save\best-seller\amazon-choice\limited-time-deal to search_result&#10;将url置于search_result最后" />
     <MESSAGE value="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序&#10;增加just-save\best-seller\amazon-choice\limited-time-deal to search_result&#10;将url置于search_result最后&#10;增加amazon-brand" />
-    <option name="LAST_COMMIT_MESSAGE" value="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序&#10;增加just-save\best-seller\amazon-choice\limited-time-deal to search_result&#10;将url置于search_result最后&#10;增加amazon-brand" />
+    <MESSAGE value="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序&#10;增加just-save\best-seller\amazon-choice\limited-time-deal to search_result&#10;将url置于search_result最后&#10;增加amazon-brand&#10;增加samples" />
+    <option name="LAST_COMMIT_MESSAGE" value="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序&#10;增加just-save\best-seller\amazon-choice\limited-time-deal to search_result&#10;将url置于search_result最后&#10;增加amazon-brand&#10;增加samples" />
   </component>
 </project>
