@@ -4,7 +4,7 @@ import requests
 import time
 import re
 from PIL import Image
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 from pyquery import PyQuery as pq
 import openpyxl
 from selenium import webdriver
