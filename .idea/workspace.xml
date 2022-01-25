@@ -42,7 +42,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -243,7 +243,21 @@
       <option name="project" value="LOCAL" />
       <updated>1642669009435</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="更新samples&#10;修复bug">
+      <created>1642951244656</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1642951244656</updated>
+    </task>
+    <task id="LOCAL-00011" summary="更新samples - 1.24 除汽车摄像头">
+      <created>1643027876095</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1643027876095</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -265,6 +279,8 @@
     <MESSAGE value="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序&#10;增加just-save\best-seller\amazon-choice\limited-time-deal to search_result&#10;将url置于search_result最后" />
     <MESSAGE value="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序&#10;增加just-save\best-seller\amazon-choice\limited-time-deal to search_result&#10;将url置于search_result最后&#10;增加amazon-brand" />
     <MESSAGE value="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序&#10;增加just-save\best-seller\amazon-choice\limited-time-deal to search_result&#10;将url置于search_result最后&#10;增加amazon-brand&#10;增加samples" />
-    <option name="LAST_COMMIT_MESSAGE" value="可运行版本-源码&#10;修复category错误&#10;修复文件名冲突&#10;增加点击by-feature中see-more&#10;修改-统一表内字段出现顺序&#10;增加just-save\best-seller\amazon-choice\limited-time-deal to search_result&#10;将url置于search_result最后&#10;增加amazon-brand&#10;增加samples" />
+    <MESSAGE value="更新samples&#10;修复bug" />
+    <MESSAGE value="更新samples - 1.24 除汽车摄像头" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新samples - 1.24 除汽车摄像头" />
   </component>
 </project>
