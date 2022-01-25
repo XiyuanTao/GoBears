@@ -322,7 +322,7 @@ def parse_detail(page_source):
 
 def datail_scraping(search_page_urls,use_postal,postal,num_pages):
     detail = []
-    cate = 3
+    cate = 0
     for search_page_url in search_page_urls:
         if cate == 0:
             category = 'shampoo'
@@ -379,7 +379,7 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
 
                 driver.close()
                 driver.switch_to.window(handles[0])
-        #cate+=1
+        cate+=1
     return detail
 
 if __name__ == '__main__':
@@ -390,15 +390,12 @@ if __name__ == '__main__':
     #爬取每一品类商品列表的页面数
     num_pages = 6
 
-    # search_page_urls = ['https://www.amazon.com/s?k=shampoo&crid=3HRLZHDGH8FVG&sprefix=shampo%2Caps%2C669&ref=nb_sb_noss_2&page={}',
-    #                     'https://www.amazon.com/s?k=Body+wash&crid=A4U5UM80BRMO&sprefix=body+wash%2Caps%2C396&ref=nb_sb_noss&page={}',
-    #                     'https://www.amazon.com/s?k=Lipsticks&crid=156DT8FY808PV&sprefix=lipsticks%2Caps%2C400&ref=nb_sb_noss&page={}',
-    #                     'https://www.amazon.com/s?k=Car+camera&crid=1M80O16SRJBK0&sprefix=lipsticks%2Caps%2C363&ref=nb_sb_noss&page={}'
-    #                     ]
-    search_page_urls = [
+    search_page_urls = ['https://www.amazon.com/s?k=shampoo&crid=3HRLZHDGH8FVG&sprefix=shampo%2Caps%2C669&ref=nb_sb_noss_2&page={}',
+                        'https://www.amazon.com/s?k=Body+wash&crid=A4U5UM80BRMO&sprefix=body+wash%2Caps%2C396&ref=nb_sb_noss&page={}',
+                        'https://www.amazon.com/s?k=Lipsticks&crid=156DT8FY808PV&sprefix=lipsticks%2Caps%2C400&ref=nb_sb_noss&page={}',
+                        'https://www.amazon.com/s?k=Car+camera&crid=1M80O16SRJBK0&sprefix=lipsticks%2Caps%2C363&ref=nb_sb_noss&page={}'
+                        ]
 
-        'https://www.amazon.com/s?k=Car+camera&crid=1M80O16SRJBK0&sprefix=lipsticks%2Caps%2C363&ref=nb_sb_noss&page={}'
-        ]
 
     options = webdriver.ChromeOptions()
     options.add_argument('--disable-gpu')
