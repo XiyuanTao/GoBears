@@ -126,8 +126,8 @@ def parse_list(page_source, current_url,num_pages,category):
             './/div[contains(@class,"a-row a-size-base a-color-secondary s-align-children-center")]/div[2]/span[1]/span[1]/text()') else 0
 
         # COUPON
-        coupon = tr.xpath('.//SPAN[@class="s-coupon-clipped aok-hidden"]/text()')[0] if tr.xpath(
-            './/SPAN[@class="s-coupon-clipped aok-hidden"]/text()') else 0
+        coupon = tr.xpath('.//SPAN[@class="s-coupon-clipped aok-hidden"]/SPAN/text()')[0] if tr.xpath(
+            './/SPAN[@class="s-coupon-clipped aok-hidden"]/SPAN/text()') else 0
 
         # JUST_SAVE
         just_save_in_red = tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Save")]/text()')[0].split(" ")[1] if tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Save")]/text()') else 0
@@ -290,8 +290,11 @@ def parse_detail(page_source):
             './/span[@data-hook="review-date"]/text()') else ''
         owner = tr.xpath('.//span[@class="a-profile-name"]/text()')[0] if tr.xpath(
             './/span[@class="a-profile-name"]/text()') else ''
-        owner_title = tr.xpath('.//div[@class="badges-genome-widget"]/text()')[0] if tr.xpath(
-            './/div[@class="badges-genome-widget"]/text()') else ''
+
+        owner_titles = tr.xpath('.//div[@class="badges-genome-widget"]//text()'%k) if tr.xpath(
+            './/div[@class="badges-genome-widget"]//text()') else ''
+        owner_title = "".join([each for each in owner_titles])
+
         verfied = tr.xpath('.//span[@data-hook="avp-badge-linkless"]/text()')[0] if tr.xpath(
             './/span[@data-hook="avp-badge-linkless"]/text()') else ''
         vine = tr.xpath('.//span[@data-hook="linkless-vine-review-badge"]/text()')[0] if tr.xpath(
