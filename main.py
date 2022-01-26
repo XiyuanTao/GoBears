@@ -126,8 +126,8 @@ def parse_list(page_source, current_url,num_pages,category):
             './/div[contains(@class,"a-row a-size-base a-color-secondary s-align-children-center")]/div[2]/span[1]/span[1]/text()') else 0
 
         # COUPON
-        coupon = tr.xpath('.//SPAN[@class="s-coupon-clipped aok-hidden"]/SPAN/text()')[0] if tr.xpath(
-            './/SPAN[@class="s-coupon-clipped aok-hidden"]/SPAN/text()') else 0
+        coupons = tr.xpath('.//span[@class="s-coupon-unclipped"]//text()') if tr.xpath('.//span[@class="s-coupon-unclipped"]//text()') else 0
+        coupon = "".join([each for each in coupons])
 
         # JUST_SAVE
         just_save_in_red = tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Save")]/text()')[0].split(" ")[1] if tr.xpath('.//span[@class="a-badge-text" and contains(text(),"Save")]/text()') else 0
