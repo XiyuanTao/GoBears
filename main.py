@@ -291,7 +291,7 @@ def parse_detail(page_source):
         owner = tr.xpath('.//span[@class="a-profile-name"]/text()')[0] if tr.xpath(
             './/span[@class="a-profile-name"]/text()') else ''
 
-        owner_titles = tr.xpath('.//div[@class="badges-genome-widget"]//text()'%k) if tr.xpath(
+        owner_titles = tr.xpath('.//div[@class="badges-genome-widget"]//text()') if tr.xpath(
             './/div[@class="badges-genome-widget"]//text()') else ''
         owner_title = "".join([each for each in owner_titles])
 
