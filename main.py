@@ -126,7 +126,7 @@ def parse_list(page_source, current_url,num_pages,category):
             './/div[contains(@class,"a-row a-size-base a-color-secondary s-align-children-center")]/div[2]/span[1]/span[1]/text()') else 0
 
         # COUPON
-        coupons = tr.xpath('.//span[@class="s-coupon-unclipped"]//text()') if tr.xpath('.//span[@class="s-coupon-unclipped"]//text()') else 0
+        coupons = tr.xpath('.//span[@class="s-coupon-unclipped"]//text()') if tr.xpath('.//span[@class="s-coupon-unclipped"]//text()') else '0'
         coupon = "".join([each for each in coupons])
 
         # JUST_SAVE
@@ -358,7 +358,7 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
                 time.sleep(2)
                 js = "return action=document.body.scrollHeight"
                 new_height = driver.execute_script(js)
-                for i in range(0, new_height, 150):
+                for i in range(0, new_height, 100):
                     driver.execute_script('window.scrollTo(0, %s)' % (i))
                 time.sleep(1)
 
@@ -404,6 +404,7 @@ if __name__ == '__main__':
     options.add_argument('--disable-gpu')
     options.add_argument("disable-web-security")
     options.add_argument('disable-infobars')
+    options.add_argument("--headless")
     prefs = {"profile.managed_default_content_settings.images": 2}  # 设置无图模式
     options.add_experimental_option("prefs", prefs)
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
