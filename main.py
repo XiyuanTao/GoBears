@@ -331,10 +331,16 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
             category = 'shampoo'
         elif cate == 1:
             category = 'body wash'
+            time.sleep(600)
+            print("休眠600s")
         elif cate == 2:
             category = 'lipstick'
+            time.sleep(600)
+            print("休眠600s")
         elif cate == 3:
             category = 'car camera'
+            time.sleep(600)
+            print("休眠600s")
 
         for i in range(1, num_pages):
             print("正在爬取", search_page_url.format(i))
@@ -343,6 +349,7 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
 
             if i == 1 and bool(use_postal):
                 change_address(postal)
+
 
             wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.s-result-list")))
             for url in parse_list(driver.page_source, search_page_url.format(i),i,category):
