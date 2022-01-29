@@ -17,6 +17,7 @@ from lxml import etree, html
 from datetime import datetime
 import csv
 import numpy
+import schedule
 
 def change_address(postal):
     while True:
@@ -390,7 +391,7 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
                 driver.close()
                 driver.switch_to.window(handles[0])
         cate+=1
-    return detail
+    #return detail
 
 if __name__ == '__main__':
     #是否使用固定邮编
@@ -420,7 +421,5 @@ if __name__ == '__main__':
 
     driver.maximize_window()
     row = 2
-
-    detail = datail_scraping(search_page_urls,use_postal,postal_berkeley,num_pages)
-    print('this is detail')
+    schedule.every().day.at("10:30").do(datail_scraping(search_page_urls,use_postal,postal_berkeley,num_pages))
     print("爬取结束")
