@@ -154,6 +154,7 @@ def parse_list(page_source, current_url,num_pages,category):
         time_year = datetime.today().year
         time_month = datetime.today().month
         time_day = datetime.today().day
+        time = datetime.today()
 
         good_info.append(asin)
         good_info.append(time_year)
@@ -181,6 +182,7 @@ def parse_list(page_source, current_url,num_pages,category):
         good_info.append(price_of_sepcification)
         good_info.append(title)
         good_info.append(fullurl)
+        good_info.append(time)
 
 
         search_result.append(good_info)
@@ -201,6 +203,7 @@ def parse_detail(page_source):
     time_year = datetime.today().year
     time_month = datetime.today().month
     time_day = datetime.today().day
+    time = datetime.today()
 
     # RATING_DISTRIBUTION
     rating_dist = []
@@ -223,15 +226,18 @@ def parse_detail(page_source):
     star_1 = re.sub(u"([^\u0030-\u0039])", "", star_1)
     star_avg = star_avg.replace(",", "")
 
+
     rating_dist.append(time_year)
     rating_dist.append(time_month)
     rating_dist.append(time_day)
+
     rating_dist.append(star_5)
     rating_dist.append(star_4)
     rating_dist.append(star_3)
     rating_dist.append(star_2)
     rating_dist.append(star_1)
     rating_dist.append(star_avg)
+    rating_dist.append(time)
 
     with open('rating_distribution.csv', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
@@ -253,6 +259,7 @@ def parse_detail(page_source):
         star = tr.xpath('.//span[@class="a-size-base a-color-tertiary"]/text()')[0]
         by_feature.append(feature)
         by_feature.append(star)
+        by_feature.append(time)
 
         with open('by_feature.csv', 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
@@ -269,12 +276,13 @@ def parse_detail(page_source):
     keyword.append(time_day)
     for tr in trs:
         keyword.append(tr.xpath('./text()')[0].replace('\r','').strip())
-
     keyword = list(numpy.array(keyword).flat)
+    keyword.append(time)
     with open('key_words.csv', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(keyword)
     keyword = []
+
 
     # REVIEW
     review = []
@@ -317,6 +325,7 @@ def parse_detail(page_source):
         review.append(verfied)
         review.append(vine)
         review.append(component)
+        review.append(time)
         with open('reviews.csv', 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(review)
@@ -421,5 +430,5 @@ if __name__ == '__main__':
 
     driver.maximize_window()
     row = 2
-    schedule.every().day.at("10:30").do(datail_scraping(search_page_urls,use_postal,postal_berkeley,num_pages))
+    datail_scraping(search_page_urls,use_postal,postal_berkeley,num_pages)
     print("爬取结束")
