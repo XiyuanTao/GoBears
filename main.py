@@ -421,10 +421,12 @@ if __name__ == '__main__':
     options = webdriver.ChromeOptions()
     option = webdriver.ChromeOptions()
     # linux服务器
-    option.add_argument('headless')
-    option.add_argument('--no-sandbox')
-    option.add_argument('--disable-dev-shm-usage')
-    # 静默模式
+    options.add_argument('headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('blink-settings=imagesEnabled=false')
+    # 静默模式mj
+
     options.add_argument('--disable-gpu')
     options.add_argument("disable-web-security")
     options.add_argument('disable-infobars')
