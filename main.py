@@ -17,7 +17,7 @@ from lxml import etree, html
 from datetime import datetime
 import csv
 import numpy
-import schedule
+
 
 def change_address(postal):
     while True:
