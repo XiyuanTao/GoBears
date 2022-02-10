@@ -19,6 +19,7 @@ import csv
 import numpy
 
 
+
 def change_address(postal):
     while True:
         try:
