@@ -434,7 +434,7 @@ if __name__ == '__main__':
     prefs = {"profile.managed_default_content_settings.images": 2}  # 设置无图模式
     options.add_experimental_option("prefs", prefs)
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
-    driver = webdriver.Chrome('usr/GoBears/chromedriver', chrome_options=options)
+    driver = webdriver.Chrome('/usr/GoBears/chromedriver', chrome_options=options)
     wait = WebDriverWait(driver, 20)
 
     driver.maximize_window()
