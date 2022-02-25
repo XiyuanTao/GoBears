@@ -362,7 +362,7 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
                 change_address(postal)
 
 
-            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.s-result-list")))
+            #wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.s-result-list")))
             for url in parse_list(driver.page_source, search_page_url.format(i),i,category):
                 js = 'window.open("' + url + '&language=en_US");'
                 driver.execute_script(js)
@@ -435,6 +435,7 @@ if __name__ == '__main__':
     options.add_experimental_option("prefs", prefs)
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
     driver = webdriver.Chrome('/usr/GoBears/chromedriver', chrome_options=options)
+    #driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
     wait = WebDriverWait(driver, 20)
 
     driver.maximize_window()
