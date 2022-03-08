@@ -74,6 +74,9 @@ def parse_list(page_source, current_url,num_pages,category):
         re.search('(?<=(dp%2F))(.+?){10}', fullurl)[0]
 
         # TITLE
+
+
+
         title = tr.xpath('.//span[contains(@class,"a-size-base-plus a-color-base a-text-normal")]/text()')[0] if tr.xpath('.//span[contains(@class,"a-size-base-plus a-color-base a-text-normal")]/text()') else tr.xpath('.//span[@class = "a-size-medium a-color-base a-text-normal"]/text()')[0]
 
         # PRICE
@@ -354,6 +357,7 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
             print("休眠600s")
 
         for i in range(1, num_pages):
+            if i == 10: time.sleep(600)
             print("正在爬取", search_page_url.format(i))
             driver.get(search_page_url.format(i))
             time.sleep(2)
@@ -361,6 +365,12 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages):
             if i == 1 and bool(use_postal):
                 change_address(postal)
 
+            time.sleep(2)
+            js = "return action=document.body.scrollHeight"
+            new_height = driver.execute_script(js)
+            for k in range(0, new_height, 100):
+                driver.execute_script('window.scrollTo(0, %s)' % (k))
+            time.sleep(1)
 
             #wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.s-result-list")))
             for url in parse_list(driver.page_source, search_page_url.format(i),i,category):
@@ -409,19 +419,19 @@ if __name__ == '__main__':
     postal_berkeley = "94704"
     postal_nyc = '10027'
     #爬取每一品类商品列表的页面数
-    num_pages = 6
+    num_pages = 21
 
-    search_page_urls = ['https://www.amazon.com/s?k=shampoo&crid=3HRLZHDGH8FVG&sprefix=shampo%2Caps%2C669&ref=nb_sb_noss_2&page={}',
-                        'https://www.amazon.com/s?k=Body+wash&crid=A4U5UM80BRMO&sprefix=body+wash%2Caps%2C396&ref=nb_sb_noss&page={}',
-                        'https://www.amazon.com/s?k=Lipsticks&crid=156DT8FY808PV&sprefix=lipsticks%2Caps%2C400&ref=nb_sb_noss&page={}',
-                        'https://www.amazon.com/s?k=Car+camera&crid=1M80O16SRJBK0&sprefix=lipsticks%2Caps%2C363&ref=nb_sb_noss&page={}'
+    search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}',
+                        'https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}',
+                        'https://www.amazon.com/s?k=Lipstick&i=beauty&rh=n%3A11059111&page={}',
+                        'https://www.amazon.com/s?k=Car+Video&i=car-electronics&rh=n%3A10980521&page={}'
                         ]
 
 
     options = webdriver.ChromeOptions()
     option = webdriver.ChromeOptions()
     # linux服务器
-    options.add_argument('headless')
+    #options.add_argument('headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('blink-settings=imagesEnabled=false')
@@ -430,15 +440,17 @@ if __name__ == '__main__':
     options.add_argument('--disable-gpu')
     options.add_argument("disable-web-security")
     options.add_argument('disable-infobars')
-    options.add_argument("--headless")
+    #options.add_argument("--headless")
     prefs = {"profile.managed_default_content_settings.images": 2}  # 设置无图模式
     options.add_experimental_option("prefs", prefs)
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
-    driver = webdriver.Chrome('/usr/GoBears/chromedriver', chrome_options=options)
-    #driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+    #driver = webdriver.Chrome('/usr/GoBears/chromedriver', chrome_options=options)
+    driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
     wait = WebDriverWait(driver, 20)
 
     driver.maximize_window()
     row = 2
     datail_scraping(search_page_urls,use_postal,postal_berkeley,num_pages)
+    driver.quit
+    driver.quit
     print("爬取结束")
