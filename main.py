@@ -337,9 +337,9 @@ def parse_detail(page_source):
 
     return attr_list
 
-def datail_scraping(search_page_urls,use_postal,postal,num_pages):
+def datail_scraping(search_page_urls,use_postal,postal,num_pages,cate):
     detail = []
-    cate = 0
+    #cate = 0
     for search_page_url in search_page_urls:
         if cate == 0:
             category = 'shampoo'
@@ -419,19 +419,18 @@ if __name__ == '__main__':
     postal_berkeley = "94704"
     postal_nyc = '10027'
     #爬取每一品类商品列表的页面数
-    num_pages = 21
+    num_pages = 8
 
-    search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}',
-                        'https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}',
-                        'https://www.amazon.com/s?k=Lipstick&i=beauty&rh=n%3A11059111&page={}',
-                        'https://www.amazon.com/s?k=Car+Video&i=car-electronics&rh=n%3A10980521&page={}'
-                        ]
+    #search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}',
+                        #'https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}',
+                        #'https://www.amazon.com/s?k=Lipstick&i=beauty&rh=n%3A11059111&page={}',
+                        #'https://www.amazon.com/s?k=Car+Video&i=car-electronics&rh=n%3A10980521&page={}']
 
 
     options = webdriver.ChromeOptions()
     option = webdriver.ChromeOptions()
     # linux服务器
-    #options.add_argument('headless')
+    options.add_argument('headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('blink-settings=imagesEnabled=false')
@@ -440,17 +439,110 @@ if __name__ == '__main__':
     options.add_argument('--disable-gpu')
     options.add_argument("disable-web-security")
     options.add_argument('disable-infobars')
-    #options.add_argument("--headless")
+    options.add_argument("--headless")
     prefs = {"profile.managed_default_content_settings.images": 2}  # 设置无图模式
     options.add_experimental_option("prefs", prefs)
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
     #driver = webdriver.Chrome('/usr/GoBears/chromedriver', chrome_options=options)
-    driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
-    wait = WebDriverWait(driver, 20)
 
-    driver.maximize_window()
-    row = 2
-    datail_scraping(search_page_urls,use_postal,postal_berkeley,num_pages)
-    driver.quit
-    driver.quit
-    print("爬取结束")
+    try:
+        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        wait = WebDriverWait(driver, 20)
+        driver.maximize_window()
+        row = 2
+        search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}']
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,0)
+        #driver.quit
+        #driver.quit
+        print("shampoo爬取结束")
+    except:
+        driver.quit
+        driver.quit
+        print("出现错误，重试")
+        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        wait = WebDriverWait(driver, 20)
+        driver.maximize_window()
+        row = 2
+        search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}']
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,0)
+        driver.quit
+        driver.quit
+        print("重试后shampoo爬取结束")
+
+    # try:
+    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+    #     wait = WebDriverWait(driver, 20)
+    #     driver.maximize_window()
+    #     row = 2
+    #     search_page_urls = ['https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}']
+    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,1)
+    #     driver.quit
+    #     driver.quit
+    #     print("body cleanser爬取结束")
+    # except:
+    #     driver.quit
+    #     driver.quit
+    #     print("出现错误，重试")
+    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+    #     wait = WebDriverWait(driver, 20)
+    #     driver.maximize_window()
+    #     row = 2
+    #     search_page_urls = ['https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}']
+    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,1)
+    #     driver.quit
+    #     driver.quit
+    #     print("重试后body cleanser爬取结束")
+    #
+    # try:
+    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+    #     wait = WebDriverWait(driver, 20)
+    #     driver.maximize_window()
+    #     row = 2
+    #     search_page_urls = ['https://www.amazon.com/s?k=Lipstick&i=beauty&rh=n%3A11059111&page={}']
+    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,2)
+    #     driver.quit
+    #     driver.quit
+    #     print("Lipstick爬取结束")
+    # except:
+    #     driver.quit
+    #     driver.quit
+    #     print("出现错误，重试")
+    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+    #     wait = WebDriverWait(driver, 20)
+    #     driver.maximize_window()
+    #     row = 2
+    #     search_page_urls = ['https://www.amazon.com/s?k=Lipstick&i=beauty&rh=n%3A11059111&page={}']
+    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,2)
+    #     driver.quit
+    #     driver.quit
+    #     print("重试后Lipstick爬取结束")
+    #
+    # try:
+    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+    #     wait = WebDriverWait(driver, 20)
+    #     driver.maximize_window()
+    #     row = 2
+    #     search_page_urls = ['https://www.amazon.com/s?k=Car+Video&i=car-electronics&rh=n%3A10980521&page={}']
+    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,3)
+    #     driver.quit
+    #     driver.quit
+    #     print("car video爬取结束")
+    # except:
+    #     driver.quit
+    #     driver.quit
+    #     print("出现错误，重试")
+    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+    #     wait = WebDriverWait(driver, 20)
+    #     driver.maximize_window()
+    #     row = 2
+    #     search_page_urls = ['https://www.amazon.com/s?k=Car+Video&i=car-electronics&rh=n%3A10980521&page={}']
+    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,3)
+    #     driver.quit
+    #     driver.quit
+    #     print("重试后car video爬取结束")
+
+    print("全部结束")
+
+
+
+
