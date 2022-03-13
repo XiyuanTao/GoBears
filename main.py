@@ -542,7 +542,3 @@ if __name__ == '__main__':
     #     print("重试后car video爬取结束")
 
     print("全部结束")
-
-
-
-
