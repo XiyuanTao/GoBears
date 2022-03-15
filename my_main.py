@@ -345,16 +345,16 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages,cate):
             category = 'shampoo'
         elif cate == 1:
             category = 'body wash'
-            #time.sleep(600)
             print("休眠600s")
+            time.sleep(1000)
         elif cate == 2:
             category = 'lipstick'
-            #time.sleep(600)
             print("休眠600s")
+            time.sleep(1000)
         elif cate == 3:
             category = 'car camera'
-            #time.sleep(600)
             print("休眠600s")
+
 
         for i in range(1, num_pages):
             if i == 10: time.sleep(600)
@@ -445,77 +445,77 @@ if __name__ == '__main__':
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
     #driver = webdriver.Chrome('/usr/GoBears/chromedriver', chrome_options=options)
 
-    # try:
-    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
-    #     wait = WebDriverWait(driver, 20)
-    #     driver.maximize_window()
-    #     row = 2
-    #     search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}']
-    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,0)
-    #     #driver.quit
-    #     #driver.quit
-    #     print("shampoo爬取结束")
-    # except:
-    #     driver.quit
-    #     driver.quit
-    #     print("出现错误，重试")
-    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
-    #     wait = WebDriverWait(driver, 20)
-    #     driver.maximize_window()
-    #     row = 2
-    #     search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}']
-    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,0)
-    #     driver.quit
-    #     driver.quit
-    #     print("重试后shampoo爬取结束")
+    try:
+        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        wait = WebDriverWait(driver, 20)
+        driver.maximize_window()
+        row = 2
+        search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}']
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,0)
+        #driver.quit
+        #driver.quit
+        print("shampoo爬取结束")
+    except:
+        driver.quit
+        driver.quit
+        print("出现错误，重试")
+        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        wait = WebDriverWait(driver, 20)
+        driver.maximize_window()
+        row = 2
+        search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}']
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,0)
+        driver.quit
+        driver.quit
+        print("重试后shampoo爬取结束")
 
-    # try:
-    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
-    #     wait = WebDriverWait(driver, 20)
-    #     driver.maximize_window()
-    #     row = 2
-    #     search_page_urls = ['https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}']
-    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,1)
-    #     driver.quit
-    #     driver.quit
-    #     print("body cleanser爬取结束")
-    # except:
-    #     driver.quit
-    #     driver.quit
-    #     print("出现错误，重试")
-    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
-    #     wait = WebDriverWait(driver, 20)
-    #     driver.maximize_window()
-    #     row = 2
-    #     search_page_urls = ['https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}']
-    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,1)
-    #     driver.quit
-    #     driver.quit
-    #     print("重试后body cleanser爬取结束")
+    try:
+        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        wait = WebDriverWait(driver, 20)
+        driver.maximize_window()
+        row = 2
+        search_page_urls = ['https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}']
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,1)
+        driver.quit
+        driver.quit
+        print("body cleanser爬取结束")
+    except:
+        driver.quit
+        driver.quit
+        print("出现错误，重试")
+        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        wait = WebDriverWait(driver, 20)
+        driver.maximize_window()
+        row = 2
+        search_page_urls = ['https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}']
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,1)
+        driver.quit
+        driver.quit
+        print("重试后body cleanser爬取结束")
 
-    # try:
-    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
-    #     wait = WebDriverWait(driver, 20)
-    #     driver.maximize_window()
-    #     row = 2
-    #     search_page_urls = ['https://www.amazon.com/s?k=Lipstick&i=beauty&rh=n%3A11059111&page={}']
-    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,2)
-    #     driver.quit
-    #     driver.quit
-    #     print("Lipstick爬取结束")
-    # except:
-    #     driver.quit
-    #     driver.quit
-    #     print("出现错误，重试")
-    #     driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
-    #     wait = WebDriverWait(driver, 20)
-    #     driver.maximize_window()
-    #     row = 2
-    #     search_page_urls = ['https://www.amazon.com/s?k=Lipstick&i=beauty&rh=n%3A11059111&page={}']
-    #     datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,2)
-    #     driver.quit
-    #     driver.quit
-    #     print("重试后Lipstick爬取结束")
+    try:
+        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        wait = WebDriverWait(driver, 20)
+        driver.maximize_window()
+        row = 2
+        search_page_urls = ['https://www.amazon.com/s?k=Lipstick&i=beauty&rh=n%3A11059111&page={}']
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,2)
+        driver.quit
+        driver.quit
+        print("Lipstick爬取结束")
+    except:
+        driver.quit
+        driver.quit
+        print("出现错误，重试")
+        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        wait = WebDriverWait(driver, 20)
+        driver.maximize_window()
+        row = 2
+        search_page_urls = ['https://www.amazon.com/s?k=Lipstick&i=beauty&rh=n%3A11059111&page={}']
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,2)
+        driver.quit
+        driver.quit
+        print("重试后Lipstick爬取结束")
 
     try:
         driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
