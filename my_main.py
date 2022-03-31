@@ -383,12 +383,18 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages,cate):
                 driver.switch_to.window(handles[-1])
 
                 # 下划
-                time.sleep(2)
+                #time.sleep(2)
                 js = "return action=document.body.scrollHeight"
                 new_height = driver.execute_script(js)
-                for i in range(0, new_height, 100):
+                #time.sleep(1)
+                for i in range(0, new_height, 250):
+
+                    time.sleep(0.05)
                     driver.execute_script('window.scrollTo(0, %s)' % (i))
-                time.sleep(1)
+                #time.sleep(2)
+                # for i in range(0, new_height//2, 100):
+                #     driver.execute_script('window.scrollTo(0, %s)' % (i))
+                #time.sleep(2)
 
                 # 加载更多by_feature
                 # html = etree.HTML(driver.page_source)
@@ -446,7 +452,7 @@ if __name__ == '__main__':
     #driver = webdriver.Chrome('/usr/GoBears/chromedriver', chrome_options=options)
 
     try:
-        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        driver = webdriver.Chrome('./chromedriver', chrome_options=options)
         wait = WebDriverWait(driver, 20)
         driver.maximize_window()
         row = 2
@@ -459,7 +465,7 @@ if __name__ == '__main__':
         driver.quit
         driver.quit
         print("出现错误，重试")
-        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        driver = webdriver.Chrome('./chromedriver', chrome_options=options)
         wait = WebDriverWait(driver, 20)
         driver.maximize_window()
         row = 2
@@ -470,7 +476,7 @@ if __name__ == '__main__':
         print("重试后shampoo爬取结束")
 
     try:
-        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        driver = webdriver.Chrome('./chromedriver', chrome_options=options)
         wait = WebDriverWait(driver, 20)
         driver.maximize_window()
         row = 2
@@ -483,7 +489,7 @@ if __name__ == '__main__':
         driver.quit
         driver.quit
         print("出现错误，重试")
-        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        driver = webdriver.Chrome('./chromedriver', chrome_options=options)
         wait = WebDriverWait(driver, 20)
         driver.maximize_window()
         row = 2
@@ -494,7 +500,7 @@ if __name__ == '__main__':
         print("重试后body cleanser爬取结束")
 
     try:
-        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        driver = webdriver.Chrome('./chromedriver', chrome_options=options)
         wait = WebDriverWait(driver, 20)
         driver.maximize_window()
         row = 2
@@ -507,7 +513,7 @@ if __name__ == '__main__':
         driver.quit
         driver.quit
         print("出现错误，重试")
-        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        driver = webdriver.Chrome('./chromedriver', chrome_options=options)
         wait = WebDriverWait(driver, 20)
         driver.maximize_window()
         row = 2
@@ -518,7 +524,7 @@ if __name__ == '__main__':
         print("重试后Lipstick爬取结束")
 
     try:
-        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        driver = webdriver.Chrome('./chromedriver', chrome_options=options)
         wait = WebDriverWait(driver, 20)
         driver.maximize_window()
         row = 2
@@ -531,7 +537,7 @@ if __name__ == '__main__':
         driver.quit
         driver.quit
         print("出现错误，重试")
-        driver = webdriver.Chrome('/Users/xiyuantao/Desktop/chromedriver', chrome_options=options)
+        driver = webdriver.Chrome('./chromedriver', chrome_options=options)
         wait = WebDriverWait(driver, 20)
         driver.maximize_window()
         row = 2
