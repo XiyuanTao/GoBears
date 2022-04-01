@@ -190,7 +190,7 @@ def parse_list(page_source, current_url,num_pages,category):
 
 
         search_result.append(good_info)
-        with open('search_result.csv', 'a', newline='') as csvfile:
+        with open('search_result.csv', 'a', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(good_info)
 
@@ -243,7 +243,7 @@ def parse_detail(page_source):
     rating_dist.append(star_avg)
     rating_dist.append(time)
 
-    with open('rating_distribution.csv', 'a', newline='') as csvfile:
+    with open('rating_distribution.csv', 'a', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(rating_dist)
     rating_dist = []
@@ -265,7 +265,7 @@ def parse_detail(page_source):
         by_feature.append(star)
         by_feature.append(time)
 
-        with open('by_feature.csv', 'a', newline='') as csvfile:
+        with open('by_feature.csv', 'a', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(by_feature)
         by_feature = []
@@ -282,7 +282,7 @@ def parse_detail(page_source):
         keyword.append(tr.xpath('./text()')[0].replace('\r','').strip())
     keyword = list(numpy.array(keyword).flat)
     keyword.append(time)
-    with open('key_words.csv', 'a', newline='') as csvfile:
+    with open('key_words.csv', 'a', newline='',encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(keyword)
     keyword = []
@@ -330,7 +330,7 @@ def parse_detail(page_source):
         review.append(vine)
         review.append(component)
         review.append(time)
-        with open('reviews.csv', 'a', newline='') as csvfile:
+        with open('reviews.csv', 'a', newline='' , encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(review)
         review = []
@@ -436,7 +436,7 @@ if __name__ == '__main__':
     options = webdriver.ChromeOptions()
     option = webdriver.ChromeOptions()
     # linux服务器
-    options.add_argument('headless')
+    #options.add_argument('headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('blink-settings=imagesEnabled=false')
@@ -445,7 +445,7 @@ if __name__ == '__main__':
     options.add_argument('--disable-gpu')
     options.add_argument("disable-web-security")
     options.add_argument('disable-infobars')
-    options.add_argument("--headless")
+    #options.add_argument("--headless")
     prefs = {"profile.managed_default_content_settings.images": 2}  # 设置无图模式
     options.add_experimental_option("prefs", prefs)
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
