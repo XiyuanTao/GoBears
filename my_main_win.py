@@ -18,8 +18,6 @@ from datetime import datetime
 import csv
 import numpy
 
-
-
 def change_address(postal):
     while True:
         try:
@@ -55,7 +53,7 @@ def change_address(postal):
     driver.refresh()
     time.sleep(3)
 
-def parse_list(page_source, current_url,num_pages,category):
+def parse_list(page_source, current_url,num_pages,category,allurl):
     order_in_page = 1
     search_result = []
 
@@ -160,6 +158,7 @@ def parse_list(page_source, current_url,num_pages,category):
         time_day = datetime.today().day
         time = datetime.today()
 
+        allurl.append(fullurl)
         good_info.append(asin)
         good_info.append(time_year)
         good_info.append(time_month)
@@ -194,7 +193,8 @@ def parse_list(page_source, current_url,num_pages,category):
             writer = csv.writer(csvfile)
             writer.writerow(good_info)
 
-        yield fullurl
+        #yield fullurl
+        return allurl
 
 def parse_detail(page_source):
     html = etree.HTML(page_source)
@@ -346,7 +346,7 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages,cate):
         elif cate == 1:
             category = 'body wash'
             print("休眠600s")
-            time.sleep(1000)
+            #time.sleep(1000)
         elif cate == 2:
             category = 'lipstick'
             print("休眠600s")
@@ -354,6 +354,7 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages,cate):
         elif cate == 3:
             category = 'car camera'
             print("休眠600s")
+            time.sleep(1000)
 
 
         for i in range(1, num_pages):
@@ -371,6 +372,8 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages,cate):
             for k in range(0, new_height, 100):
                 driver.execute_script('window.scrollTo(0, %s)' % (k))
             time.sleep(1)
+            allurl = []
+
 
             #wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.s-result-list")))
             for url in parse_list(driver.page_source, search_page_url.format(i),i,category):
@@ -387,8 +390,7 @@ def datail_scraping(search_page_urls,use_postal,postal,num_pages,cate):
                 js = "return action=document.body.scrollHeight"
                 new_height = driver.execute_script(js)
                 #time.sleep(1)
-                for i in range(0, new_height, 250):
-
+                for i in range(0, new_height, 200):
                     time.sleep(0.05)
                     driver.execute_script('window.scrollTo(0, %s)' % (i))
                 #time.sleep(2)
@@ -426,6 +428,7 @@ if __name__ == '__main__':
     postal_nyc = '10027'
     #爬取每一品类商品列表的页面数
     num_pages = 21
+    allurl = []
 
     #search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}',
                         #'https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}',
@@ -457,9 +460,9 @@ if __name__ == '__main__':
         driver.maximize_window()
         row = 2
         search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}']
-        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,0)
-        #driver.quit
-        #driver.quit
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages, 0)
+        # driver.quit
+        # driver.quit
         print("shampoo爬取结束")
     except:
         driver.quit
@@ -470,7 +473,7 @@ if __name__ == '__main__':
         driver.maximize_window()
         row = 2
         search_page_urls = ['https://www.amazon.com/s?k=Hair+Shampoo&i=beauty&rh=n%3A11057651&page={}']
-        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,0)
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages, 0)
         driver.quit
         driver.quit
         print("重试后shampoo爬取结束")
@@ -481,7 +484,7 @@ if __name__ == '__main__':
         driver.maximize_window()
         row = 2
         search_page_urls = ['https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}']
-        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,1)
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages, 1)
         driver.quit
         driver.quit
         print("body cleanser爬取结束")
@@ -494,7 +497,7 @@ if __name__ == '__main__':
         driver.maximize_window()
         row = 2
         search_page_urls = ['https://www.amazon.com/s?k=Body+Cleansers&i=beauty&rh=n%3A11056281&page={}']
-        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages,1)
+        datail_scraping(search_page_urls, use_postal, postal_berkeley, num_pages, 1)
         driver.quit
         driver.quit
         print("重试后body cleanser爬取结束")
